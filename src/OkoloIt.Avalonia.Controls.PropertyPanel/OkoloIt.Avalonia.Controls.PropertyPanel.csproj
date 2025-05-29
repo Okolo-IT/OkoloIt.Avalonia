@@ -1,13 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <TargetFrameworks>$(CurrentTargetFramework);$(LegacyTargetFrameworks);netstandard2.0</TargetFrameworks>
         <RootNamespace>OkoloIt.Avalonia.Controls</RootNamespace>
         <IsPackable>true</IsPackable>
-        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Version>0.1.0</Version>
+        <PackageTags>avalonia;avaloniaui;ui;propertypanel;okoloit</PackageTags>
+        <PackageProjectUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</PackageProjectUrl>
+        <PackageReleaseNotes>https://github.com/Okolo-IT/OkoloIt.Avalonia/releases</PackageReleaseNotes>
+        <Authors>OkoloIt</Authors>
+        <Copyright>Copyright 2025-$([System.DateTime]::Now.ToString(`yyyy`)) &#169; The OkoloIt Project</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageDescription>Provides a control for browsing the properties of an object.</PackageDescription>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,7 +25,6 @@
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.3.0" />
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     </ItemGroup>
-
 </Project>

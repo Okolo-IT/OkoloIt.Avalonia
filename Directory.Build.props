@@ -1,6 +1,11 @@
 <Project>
   <PropertyGroup>
     <Nullable>enable</Nullable>
-    <AvaloniaVersion>11.2.5</AvaloniaVersion>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <CurrentTargetFramework>net8.0</CurrentTargetFramework>
+    <LegacyTargetFrameworks>net6.0</LegacyTargetFrameworks>
+    <LangVersion>latest</LangVersion>
+	<ImplicitUsings>enable</ImplicitUsings>
+    <AvaloniaVersion>11.3.0</AvaloniaVersion>
   </PropertyGroup>
 </Project>
