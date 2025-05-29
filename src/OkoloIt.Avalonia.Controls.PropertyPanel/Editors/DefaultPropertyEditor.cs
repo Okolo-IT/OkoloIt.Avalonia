@@ -5,15 +5,22 @@ using Avalonia.Layout;
 
 namespace OkoloIt.Avalonia.Controls.Editors;
 
-public class DefaultPropertyEditor : StackPanel, IPropertyEditor
+/// <summary>
+/// Default property editor.
+/// </summary>
+internal class DefaultPropertyEditor : StackPanel, IPropertyEditor
 {
-    public DefaultPropertyEditor()
+    /// <summary>
+    /// Creates an instance of the default property editor.
+    /// </summary>
+    internal DefaultPropertyEditor()
     {
         Orientation = Orientation.Horizontal;
         Spacing = 5;
         HorizontalAlignment = HorizontalAlignment.Stretch;
     }
 
+    /// <inheritdoc/>
     public void Bind(PropertyItem property)
     {
         TextBox textBox = new() {

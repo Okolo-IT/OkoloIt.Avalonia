@@ -4,14 +4,21 @@ using Avalonia.Layout;
 
 namespace OkoloIt.Avalonia.Controls.Editors;
 
-public class BooleanPropertyEditor : ContentControl, IPropertyEditor
+/// <summary>
+/// Property editor for a <see langword="bool"/> type.
+/// </summary>
+internal class BooleanPropertyEditor : ContentControl, IPropertyEditor
 {
-    public BooleanPropertyEditor()
+    /// <summary>
+    /// Creates an instance of the default property editor for a <see langword="bool"/> type.
+    /// </summary>
+    internal BooleanPropertyEditor()
     {
         VerticalAlignment = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
     }
 
+    /// <inheritdoc/>
     public void Bind(PropertyItem property)
     {
         CheckBox checkBox = new() {

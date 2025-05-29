@@ -4,14 +4,21 @@ using Avalonia.Layout;
 
 namespace OkoloIt.Avalonia.Controls.Editors;
 
-public class TextPropertyEditor : ContentControl, IPropertyEditor
+/// <summary>
+/// Property editor for a <see langword="string"/> type.
+/// </summary>
+internal class TextPropertyEditor : ContentControl, IPropertyEditor
 {
-    public TextPropertyEditor()
+    /// <summary>
+    /// Creates an instance of the default property editor for a <see langword="string"/> type.
+    /// </summary>
+    internal TextPropertyEditor()
     {
         VerticalAlignment = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
     }
 
+    /// <inheritdoc/>
     public void Bind(PropertyItem property)
     {
         TextBox textBox = new() {

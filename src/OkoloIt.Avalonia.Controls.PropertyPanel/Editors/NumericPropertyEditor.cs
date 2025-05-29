@@ -4,14 +4,21 @@ using Avalonia.Layout;
 
 namespace OkoloIt.Avalonia.Controls.Editors;
 
-public class NumericPropertyEditor : ContentControl, IPropertyEditor
+/// <summary>
+/// Property editor for a number type.
+/// </summary>
+internal class NumericPropertyEditor : ContentControl, IPropertyEditor
 {
-    public NumericPropertyEditor()
+    /// <summary>
+    /// Creates an instance of the default property editor for a number type.
+    /// </summary>
+    internal NumericPropertyEditor()
     {
         VerticalAlignment = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
     }
 
+    /// <inheritdoc/>
     public void Bind(PropertyItem property)
     {
         NumericUpDown numericUpDown = new() {

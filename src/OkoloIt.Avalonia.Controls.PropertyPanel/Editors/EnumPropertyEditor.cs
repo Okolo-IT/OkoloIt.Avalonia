@@ -4,14 +4,21 @@ using Avalonia.Layout;
 
 namespace OkoloIt.Avalonia.Controls.Editors;
 
-public class EnumPropertyEditor : ContentControl, IPropertyEditor
+/// <summary>
+/// Property editor for a <see langword="enum"/> type.
+/// </summary>
+internal class EnumPropertyEditor : ContentControl, IPropertyEditor
 {
-    public EnumPropertyEditor()
+    /// <summary>
+    /// Creates an instance of the default property editor for a <see langword="enum"/> type.
+    /// </summary>
+    internal EnumPropertyEditor()
     {
         VerticalAlignment = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
     }
 
+    /// <inheritdoc/>
     public void Bind(PropertyItem property)
     {
         ComboBox comboBox = new() {
