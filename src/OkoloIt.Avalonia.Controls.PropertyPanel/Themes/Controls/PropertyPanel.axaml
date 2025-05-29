@@ -1,0 +1,36 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:OkoloIt.Avalonia.Controls">
+
+    <Style Selector="local|PropertyPanel">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{TemplateBinding Categories}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="local:PropertyCategory">
+                                <Expander Header="{Binding Name}" HorizontalAlignment="Stretch" IsExpanded="True">
+                                    <ItemsControl ItemsSource="{Binding Properties}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid ColumnDefinitions="150 *" Margin="0 2">
+                                                    <TextBlock Text="{Binding DisplayName}"
+                                                               VerticalAlignment="Center"
+                                                               ToolTip.Tip="{Binding Description}"/>
+                                                    <ContentControl Grid.Column="1"
+                                                                    HorizontalAlignment="Stretch"
+                                                                    HorizontalContentAlignment="Stretch"
+                                                                    Content="{Binding Editor}"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
