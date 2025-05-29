@@ -7,8 +7,17 @@ using OkoloIt.Avalonia.Controls.Editors;
 
 namespace OkoloIt.Avalonia.Controls;
 
+/// <summary>
+/// A factory that creates editors for properties of different types.
+/// </summary>
 public static class PropertyEditorFactory
 {
+    /// <summary>
+    /// Creates an editor for the property.
+    /// </summary>
+    /// <param name="property">Descriptor of the property for which the editor is created.</param>
+    /// <param name="item">A property element representing its display in the interface.</param>
+    /// <returns>Editor for the property.</returns>
     public static Control Create(PropertyDescriptor property, PropertyItem item)
     {
         var editor = CreateEditor(property, item);
@@ -19,7 +28,7 @@ public static class PropertyEditorFactory
 
     private static Control CreateEditor(PropertyDescriptor property, PropertyItem item)
     {
-        // Создание специального редактора свойства.
+        // Creating a dedicated property editor.
         var editorAttribute = property.Attributes.OfType<EditorAttribute>().FirstOrDefault();
 
         if (editorAttribute is not null) {
@@ -33,7 +42,7 @@ public static class PropertyEditorFactory
             }
         }
 
-        // Использование встроенных редакторов.
+        // Creating inline editors.
         if (property.PropertyType == typeof(bool))
             return new BooleanPropertyEditor();
         if (property.PropertyType.IsEnum)
@@ -43,19 +52,19 @@ public static class PropertyEditorFactory
         if (property.PropertyType == typeof(int))
             return new NumericPropertyEditor();
 
-        // Использование редактора по умолчанию.
+        // Creating a default editor.
         return new DefaultPropertyEditor();
     }
 
     private static void BindEditor(Control editor, PropertyItem item)
     {
-        // Автоматическое связывание.
+        // Automatic linking.
         if (editor is IPropertyEditor propertyEditor) {
             propertyEditor.Bind(item);
             return;
         }
 
-        // Ручное связывание.
+        // Manual binding.
         var valueProperty = editor.GetType().GetProperty("Value")
             ?? editor.GetType().GetProperty("Text");
 
@@ -67,5 +76,7 @@ public static class PropertyEditorFactory
         };
 
         // editor.Bind(valueProperty.PropertyType, binding, this);
+
+        throw new NotSupportedException("Manual binding is not supported.");
     }
 }
