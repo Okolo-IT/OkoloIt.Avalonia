@@ -1,9 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+using OkoloIt.Avalonia.UiKit.Models;
 
 namespace OkoloIt.Avalonia.UiKit.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
     [ObservableProperty]
-    private string _greeting = "Welcome to Avalonia!";
+    private PropertyModel _propertyModel;
+
+    public MainViewModel()
+    {
+        PropertyModel = new() {
+            Name = "Name"
+        };
+    }
+
+    [RelayCommand]
+    private void OnGenerateRandomValues()
+    {
+        PropertyModel.Name = Path.GetRandomFileName();
+    }
 }

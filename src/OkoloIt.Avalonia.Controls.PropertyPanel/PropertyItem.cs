@@ -89,7 +89,7 @@ public class PropertyItem : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private object? ConvertValue(object? value, Type targetType)
+    private static object? ConvertValue(object? value, Type targetType)
     {
         if (value == null)
             return targetType.IsValueType ? Activator.CreateInstance(targetType) : null;

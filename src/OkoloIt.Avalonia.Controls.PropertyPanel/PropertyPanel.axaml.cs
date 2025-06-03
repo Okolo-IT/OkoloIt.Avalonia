@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.Serialization;
 
 using Avalonia;
 using Avalonia.Controls.Primitives;
@@ -61,7 +62,7 @@ public class PropertyPanel : TemplatedControl
 
         var properties = TypeDescriptor.GetProperties(Content)
             .OfType<PropertyDescriptor>()
-            .Where(p => p.IsBrowsable)
+            .Where(p => !p.Attributes.OfType<IgnoreDataMemberAttribute>().Any() && p.IsBrowsable)
             .Select(p => new PropertyItem(p, Content))
             .ToList();
 
