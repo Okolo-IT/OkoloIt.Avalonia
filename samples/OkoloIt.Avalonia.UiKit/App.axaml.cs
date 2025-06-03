@@ -1,14 +1,14 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+
 using OkoloIt.Avalonia.UiKit.ViewModels;
 using OkoloIt.Avalonia.UiKit.Views;
 
 namespace OkoloIt.Avalonia.UiKit;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -17,20 +17,15 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            // Line below is needed to remove Avalonia data validation.
-            // Without this line you will get duplicate validations from both Avalonia and CT
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
             BindingPlugins.DataValidators.RemoveAt(0);
-            desktop.MainWindow = new MainWindow
-            {
+
+            desktop.MainWindow = new MainWindow {
                 DataContext = new MainViewModel()
             };
         }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            singleViewPlatform.MainView = new MainView
-            {
+        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform) {
+            singleViewPlatform.MainView = new MainView {
                 DataContext = new MainViewModel()
             };
         }
