@@ -15,12 +15,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OkoloIt.Avalonia.Controls.P
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C71A0425-7DA8-4568-A7E2-ACA1E79A54AA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{D12319BF-4357-4B88-9E21-61C746CD52D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D12319BF-4357-4B88-9E21-61C746CD52D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D12319BF-4357-4B88-9E21-61C746CD52D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D82AD239-8BDE-D882-E6ED-4F5785CCEB2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D82AD239-8BDE-D882-E6ED-4F5785CCEB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D82AD239-8BDE-D882-E6ED-4F5785CCEB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
