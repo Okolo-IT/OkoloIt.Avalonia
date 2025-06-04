@@ -10,6 +10,7 @@ public class PropertyModel : INotifyPropertyChanged
     private bool _boolValue;
     private int _intValue;
     private string _ignoredValue = string.Empty;
+    private Position _position;
 
     public string Name {
         get => _name;
@@ -40,6 +41,14 @@ public class PropertyModel : INotifyPropertyChanged
         get => _ignoredValue;
         set {
             _ignoredValue = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public Position Position {
+        get => _position;
+        set {
+            _position = value;
             OnPropertyChanged();
         }
     }
