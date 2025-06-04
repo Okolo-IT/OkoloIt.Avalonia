@@ -1,8 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+using OkoloIt.Avalonia.Controls.Editors;
+using OkoloIt.Avalonia.UiKit.Editors;
+
 namespace OkoloIt.Avalonia.UiKit.Models;
 
+[Editor(typeof(PositionPropertyEditor), typeof(IPropertyEditor))]
 public class Position : INotifyPropertyChanged
 {
     private int _x;

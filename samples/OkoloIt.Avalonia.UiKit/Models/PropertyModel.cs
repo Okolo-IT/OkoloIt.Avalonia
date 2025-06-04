@@ -10,7 +10,10 @@ public class PropertyModel : INotifyPropertyChanged
     private bool _boolValue;
     private int _intValue;
     private string _ignoredValue = string.Empty;
-    private Position _position;
+    private Position _position = new() {
+        X = 10,
+        Y = 20,
+    };
 
     public string Name {
         get => _name;
@@ -45,6 +48,7 @@ public class PropertyModel : INotifyPropertyChanged
         }
     }
 
+    [Category("Layout")]
     public Position Position {
         get => _position;
         set {
