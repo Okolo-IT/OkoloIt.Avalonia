@@ -13,15 +13,30 @@
         <PackageTags>avalonia;avaloniaui;ui;propertypanel;okoloit</PackageTags>
         <PackageProjectUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</PackageProjectUrl>
         <PackageReleaseNotes>https://github.com/Okolo-IT/OkoloIt.Avalonia/releases</PackageReleaseNotes>
-        <Authors>OkoloIt</Authors>
-        <Copyright>Copyright 2025-$([System.DateTime]::Now.ToString(`yyyy`)) &#169; The OkoloIt Project</Copyright>
+        <Authors>OkoloIt Team</Authors>
+        <Copyright>Copyright 2025-$([System.DateTime]::Now.ToString(`yyyy`)) © The OkoloIt Project</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageDescription>Provides a control for browsing the properties of an object.</PackageDescription>
         <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</RepositoryUrl>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <PackageReadmeFile>property-panel.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
         <AvaloniaXaml Include="Themes/**/*.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\..\docs\property-panel.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\..\res\Icon.png">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
     </ItemGroup>
     
     <ItemGroup>
