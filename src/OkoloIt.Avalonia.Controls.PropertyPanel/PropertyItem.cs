@@ -1,7 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 using Avalonia.Controls;
+using Avalonia.Data.Converters;
+
+using OkoloIt.Avalonia.Controls.Editors;
 
 namespace OkoloIt.Avalonia.Controls;
 
@@ -66,7 +70,11 @@ public class PropertyItem : INotifyPropertyChanged
     /// <summary>
     /// Editor for the property.
     /// </summary>
-    public Control Editor => _editor ??= CreateEditor();
+    public Control Editor { get {
+            _editor ??= CreateEditor();
+            return _editor;
+        }
+    }
 
     /// <summary>
     /// Property value.
@@ -74,8 +82,15 @@ public class PropertyItem : INotifyPropertyChanged
     public object? Value {
         get => _descriptor.GetValue(_instance);
         set {
-            var convertedValue = ConvertValue(value, _descriptor.PropertyType);
-            _descriptor.SetValue(_instance, convertedValue);
+            if (Editor is IValueConverter converter) {
+                _descriptor.SetValue(
+                    _instance,
+                    converter.ConvertBack(value, _descriptor.PropertyType, null, CultureInfo.CurrentCulture));
+            }
+            else {
+                Converters.DefaultValueConverter.ConvertValue(value, _descriptor.PropertyType);
+            }
+
             OnPropertyChanged(nameof(Value));
         }
     }
@@ -87,28 +102,6 @@ public class PropertyItem : INotifyPropertyChanged
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    private static object? ConvertValue(object? value, Type targetType)
-    {
-        if (value == null)
-            return targetType.IsValueType ? Activator.CreateInstance(targetType) : null;
-
-        // If the type already matches.
-        if (targetType.IsInstanceOfType(value))
-            return value;
-
-        // Special cases for numeric types.
-        if (targetType == typeof(int)) {
-            if (value is decimal decimalValue)
-                return (int)decimalValue;
-
-            if (value is string strValue && int.TryParse(strValue, out var intValue))
-                return intValue;
-        }
-
-        // Standard conversion.
-        return Convert.ChangeType(value, targetType);
     }
 
     private void OnInstancePropertyChanged(object? sender, PropertyChangedEventArgs e)

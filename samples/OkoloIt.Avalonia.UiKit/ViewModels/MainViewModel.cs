@@ -21,5 +21,7 @@ public partial class MainViewModel : ViewModelBase
     private void OnGenerateRandomValues()
     {
         PropertyModel.Name = Path.GetRandomFileName();
+        PropertyModel.Position.X = Random.Shared.Next();
+        PropertyModel.Position.Y = Random.Shared.Next();
     }
 }
