@@ -9,7 +9,8 @@ public class PropertyModel : INotifyPropertyChanged
     private string _name = string.Empty;
     private bool _boolValue;
     private int _intValue;
-    private string _ignoredValue = string.Empty;
+    private ModelType _type;
+
     private Position _position = new() {
         X = 10,
         Y = 20,
@@ -33,6 +34,7 @@ public class PropertyModel : INotifyPropertyChanged
         }
     }
 
+    [DisplayName("Number")]
     public int IntValue {
         get => _intValue;
         set {
@@ -41,14 +43,8 @@ public class PropertyModel : INotifyPropertyChanged
         }
     }
 
-    [IgnoreDataMember]
-    public string IgnoredValue {
-        get => _ignoredValue;
-        set {
-            _ignoredValue = value;
-            OnPropertyChanged();
-        }
-    }
+    [Browsable(false)]
+    public string IgnoredValue { get; set; } = string.Empty;
 
     [Category("Layout")]
     public Position Position {
