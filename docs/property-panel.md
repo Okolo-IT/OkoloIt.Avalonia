@@ -59,4 +59,4 @@ Add `PropertyPanel` to your view:
 </Window>
 ```
 
-[Read More](../samples/OkoloIt.Avalonia.UiKit.Desktop)
+[Read More](../samples/OkoloIt.Avalonia.UiKit)
