@@ -2,6 +2,26 @@
 
 This is a PropertyPanel implementation for [Avalonia](https://github.com/AvaloniaUI/Avalonia), you can use it in **Avalonia** Applications.
 
+## Supported attributes
+
+You can use the following attributes listed below to edit properties in the **PropertyPanel**:
+
+- `System.ComponentModel.BrowsableAttribute`
+- `System.ComponentModel.CategoryAttribut`
+- `System.ComponentModel.DisplayNameAttribute`
+- `System.ComponentModel.EditorAttribute`
+- `System.ComponentModel.ReadOnlyAttribute`
+
+## Supported types
+
+PropertyPanel supports a small list of types, which is extended over time:
+
+- `int`
+- `bool`
+- `string`
+- `Guid`
+- `Enum`
+
 ## How To Use
 
 Install the Nuget package:
