@@ -68,17 +68,19 @@ public class PropertyItem : INotifyPropertyChanged
     /// <summary>
     /// Editor for the property.
     /// </summary>
-    public Control Editor { get {
-            _editor ??= CreateEditor();
-            return _editor;
-        }
-    }
+    public Control Editor => _editor ?? CreateEditor();
 
     /// <summary>
     /// Property value.
     /// </summary>
     public object? Value {
-        get => _descriptor.GetValue(_instance);
+        get {
+            var value = _descriptor.GetValue(_instance);
+
+            return Editor is IValueConverter converter
+                ? converter.Convert(value, _descriptor.PropertyType, null, CultureInfo.CurrentCulture)
+                : value;
+        }
         set {
             object? convertedValue = Editor is IValueConverter converter
                 ? converter.ConvertBack(value, _descriptor.PropertyType, null, CultureInfo.CurrentCulture)
@@ -108,8 +110,8 @@ public class PropertyItem : INotifyPropertyChanged
 
     private Control CreateEditor()
     {
-        var editor = PropertyEditorFactory.Create(_descriptor, this);
-        editor.DataContext = this;
-        return editor;
+        _editor = PropertyEditorFactory.CreateEditor(_descriptor);
+        PropertyEditorFactory.BindEditor(_editor, this);
+        return _editor;
     }
 }

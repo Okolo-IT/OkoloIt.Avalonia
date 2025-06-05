@@ -25,7 +25,7 @@ internal class DefaultPropertyEditor : Grid, IPropertyEditor
     }
 
     /// <inheritdoc/>
-    public void Bind(PropertyItem property)
+    public virtual void Bind(PropertyItem property)
     {
         // Text value of the object.
         TextBox textBox = new() {

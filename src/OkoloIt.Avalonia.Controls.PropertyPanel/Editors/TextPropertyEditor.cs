@@ -19,7 +19,7 @@ internal class TextPropertyEditor : ContentControl, IPropertyEditor
     }
 
     /// <inheritdoc/>
-    public void Bind(PropertyItem property)
+    public virtual void Bind(PropertyItem property)
     {
         TextBox textBox = new() {
             VerticalAlignment = VerticalAlignment.Center,

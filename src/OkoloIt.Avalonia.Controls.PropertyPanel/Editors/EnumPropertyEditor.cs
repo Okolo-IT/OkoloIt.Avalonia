@@ -19,7 +19,7 @@ internal class EnumPropertyEditor : ContentControl, IPropertyEditor
     }
 
     /// <inheritdoc/>
-    public void Bind(PropertyItem property)
+    public virtual void Bind(PropertyItem property)
     {
         ComboBox comboBox = new() {
             ItemsSource = Enum.GetValues(property.PropertyType),

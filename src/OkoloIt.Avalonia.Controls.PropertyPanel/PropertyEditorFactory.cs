@@ -16,17 +16,8 @@ public static class PropertyEditorFactory
     /// Creates an editor for the property.
     /// </summary>
     /// <param name="property">Descriptor of the property for which the editor is created.</param>
-    /// <param name="item">A property element representing its display in the interface.</param>
     /// <returns>Editor for the property.</returns>
-    public static Control Create(PropertyDescriptor property, PropertyItem item)
-    {
-        var editor = CreateEditor(property, item);
-        BindEditor(editor, item);
-
-        return editor;
-    }
-
-    private static Control CreateEditor(PropertyDescriptor property, PropertyItem item)
+    public static Control CreateEditor(PropertyDescriptor property)
     {
         // Creating a dedicated property editor.
         var editorAttribute = property.Attributes.OfType<EditorAttribute>().FirstOrDefault();
@@ -51,12 +42,20 @@ public static class PropertyEditorFactory
             return new TextPropertyEditor();
         if (property.PropertyType == typeof(int))
             return new NumericPropertyEditor();
+        if (property.PropertyType == typeof(Guid))
+            return new GuidPropertyEditor();
 
         // Creating a default editor.
         return new DefaultPropertyEditor();
     }
 
-    private static void BindEditor(Control editor, PropertyItem item)
+    /// <summary>
+    /// Binds the editor to the property.
+    /// </summary>
+    /// <param name="editor">An instance of a bindable editor.</param>
+    /// <param name="item">The instance of the property to which the editor is bound.</param>
+    /// <exception cref="NotSupportedException">Manual binding is not supported.</exception>
+    public static void BindEditor(Control editor, PropertyItem item)
     {
         // Automatic linking.
         if (editor is IPropertyEditor propertyEditor) {
