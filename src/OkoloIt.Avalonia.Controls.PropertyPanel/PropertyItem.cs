@@ -5,8 +5,6 @@ using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 
-using OkoloIt.Avalonia.Controls.Editors;
-
 namespace OkoloIt.Avalonia.Controls;
 
 /// <summary>
@@ -82,15 +80,11 @@ public class PropertyItem : INotifyPropertyChanged
     public object? Value {
         get => _descriptor.GetValue(_instance);
         set {
-            if (Editor is IValueConverter converter) {
-                _descriptor.SetValue(
-                    _instance,
-                    converter.ConvertBack(value, _descriptor.PropertyType, null, CultureInfo.CurrentCulture));
-            }
-            else {
-                Converters.DefaultValueConverter.ConvertValue(value, _descriptor.PropertyType);
-            }
+            object? convertedValue = Editor is IValueConverter converter
+                ? converter.ConvertBack(value, _descriptor.PropertyType, null, CultureInfo.CurrentCulture)
+                : Converters.DefaultValueConverter.ConvertValue(value, _descriptor.PropertyType);
 
+            _descriptor.SetValue(_instance, convertedValue);
             OnPropertyChanged(nameof(Value));
         }
     }
