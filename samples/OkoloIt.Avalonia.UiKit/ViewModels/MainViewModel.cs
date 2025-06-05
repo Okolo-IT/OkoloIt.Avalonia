@@ -23,5 +23,6 @@ public partial class MainViewModel : ViewModelBase
         PropertyModel.Name = Path.GetRandomFileName();
         PropertyModel.Position.X = Random.Shared.Next();
         PropertyModel.Position.Y = Random.Shared.Next();
+        PropertyModel.Type       = ModelType.Simple;
     }
 }

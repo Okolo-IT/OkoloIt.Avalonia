@@ -59,6 +59,14 @@ public class PropertyModel : INotifyPropertyChanged
         }
     }
 
+    public ModelType Type {
+        get => _type;
+        set {
+            _type = value;
+            OnPropertyChanged();
+        }
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
