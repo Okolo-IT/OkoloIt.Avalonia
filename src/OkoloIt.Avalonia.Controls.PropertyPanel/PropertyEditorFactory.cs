@@ -42,6 +42,8 @@ public static class PropertyEditorFactory
             return new TextPropertyEditor();
         if (property.PropertyType == typeof(int))
             return new NumericPropertyEditor();
+        if (property.PropertyType == typeof(Guid))
+            return new GuidPropertyEditor();
 
         // Creating a default editor.
         return new DefaultPropertyEditor();
