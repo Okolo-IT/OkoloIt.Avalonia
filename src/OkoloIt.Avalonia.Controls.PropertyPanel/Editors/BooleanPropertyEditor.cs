@@ -19,7 +19,7 @@ internal class BooleanPropertyEditor : ContentControl, IPropertyEditor
     }
 
     /// <inheritdoc/>
-    public void Bind(PropertyItem property)
+    public virtual void Bind(PropertyItem property)
     {
         CheckBox checkBox = new() {
             HorizontalAlignment = HorizontalAlignment.Stretch,

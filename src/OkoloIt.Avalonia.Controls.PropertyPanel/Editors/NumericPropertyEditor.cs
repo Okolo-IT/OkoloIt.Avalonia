@@ -19,7 +19,7 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
     }
 
     /// <inheritdoc/>
-    public void Bind(PropertyItem property)
+    public virtual void Bind(PropertyItem property)
     {
         NumericUpDown numericUpDown = new() {
             HorizontalAlignment = HorizontalAlignment.Stretch,
