@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Numerics;
 
 using Avalonia.Controls;
 using Avalonia.Data;
@@ -40,10 +41,22 @@ public static class PropertyEditorFactory
             return new EnumPropertyEditor();
         if (property.PropertyType == typeof(string))
             return new TextPropertyEditor();
-        if (property.PropertyType == typeof(int))
-            return new NumericPropertyEditor();
         if (property.PropertyType == typeof(Guid))
             return new GuidPropertyEditor();
+
+        if (   property.PropertyType == typeof(int)
+            || property.PropertyType == typeof(decimal)
+            || property.PropertyType == typeof(uint)
+            || property.PropertyType == typeof(long)
+            || property.PropertyType == typeof(ulong)
+            || property.PropertyType == typeof(short)
+            || property.PropertyType == typeof(ushort)
+            || property.PropertyType == typeof(byte)
+            || property.PropertyType == typeof(sbyte)
+            || property.PropertyType == typeof(float)
+            || property.PropertyType == typeof(double)) {
+            return new NumericPropertyEditor();
+        }
 
         // Creating a default editor.
         return new DefaultPropertyEditor();
