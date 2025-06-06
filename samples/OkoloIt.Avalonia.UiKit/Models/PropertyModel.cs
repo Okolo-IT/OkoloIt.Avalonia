@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 
 namespace OkoloIt.Avalonia.UiKit.Models;
 
@@ -35,6 +34,7 @@ public class PropertyModel : INotifyPropertyChanged
     }
 
     [DisplayName("Number")]
+    [Category("Numbers")]
     public int IntValue {
         get => _intValue;
         set {
@@ -42,6 +42,12 @@ public class PropertyModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
+    [Category("Numbers")]
+    public ushort UShortValue { get; set; }
+
+    [Category("Numbers")]
+    public double DoubleValue { get; set; }
 
     [Browsable(false)]
     public string IgnoredValue { get; set; } = string.Empty;

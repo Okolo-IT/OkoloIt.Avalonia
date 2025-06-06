@@ -17,6 +17,16 @@ You can use the following attributes listed below to edit properties in the **Pr
 PropertyPanel supports a small list of types, which is extended over time:
 
 - `int`
+- `uint`
+- `long`
+- `ulong`
+- `short`
+- `ushort`
+- `byte`
+- `sbyte`
+- `float`
+- `double`
+- `decimal`
 - `bool`
 - `string`
 - `Guid`
