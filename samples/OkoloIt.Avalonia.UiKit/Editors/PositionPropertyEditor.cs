@@ -20,6 +20,7 @@ public class PositionPropertyEditor : Grid, IPropertyEditor, IValueConverter
 
         Margin = new Thickness(0.0, 0.0, 5.0, 0.0);
         ColumnSpacing = 5;
+        RowSpacing = 4;
         RowDefinitions = [
             new RowDefinition(GridLength.Auto),
             new RowDefinition(GridLength.Auto),
