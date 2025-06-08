@@ -69,6 +69,18 @@ public class PropertyModel : INotifyPropertyChanged
         }
     }
 
+    [Category("Date & time")]
+    public DateTime FullDate { get; set; } = DateTime.Now;
+
+    [Category("Date & time")]
+    public TimeOnly Time { get; set; } = new TimeOnly(12, 55);
+
+    [Category("Date & time")]
+    public DateOnly Date { get; set; } = new DateOnly(2025, 12, 01);
+
+    [Category("Date & time")]
+    public TimeSpan TimeSpan { get; set; } = DateTime.Now.TimeOfDay;
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

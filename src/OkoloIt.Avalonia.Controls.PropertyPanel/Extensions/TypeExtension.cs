@@ -81,9 +81,11 @@ public static class TypeExtension
 #if NET6_0_OR_GREATER
         return type == typeof(DateTime)
             || type == typeof(DateOnly)
-            || type == typeof(TimeOnly);
+            || type == typeof(TimeOnly)
+            || type == typeof(TimeSpan);
 #else
-        return type == typeof(DateTime);
+        return type == typeof(DateTime)
+            || type == typeof(TimeSpan);
 #endif
     }
 }

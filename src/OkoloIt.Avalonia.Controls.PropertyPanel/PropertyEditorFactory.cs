@@ -43,6 +43,8 @@ public static class PropertyEditorFactory
             return new TextPropertyEditor();
         if (property.PropertyType.IsGuid())
             return new GuidPropertyEditor();
+        if (property.PropertyType.IsDateTime())
+            return new DateTimePropertyEditor();
         if (property.PropertyType.IsNumeric())
             return new NumericPropertyEditor();
 
