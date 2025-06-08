@@ -14,7 +14,7 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
     /// </summary>
     internal NumericPropertyEditor()
     {
-        VerticalAlignment = VerticalAlignment.Center;
+        VerticalAlignment   = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
     }
 

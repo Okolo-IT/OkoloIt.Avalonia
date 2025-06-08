@@ -20,6 +20,7 @@ public class PositionPropertyEditor : Grid, IPropertyEditor, IValueConverter
 
         Margin = new Thickness(0.0, 0.0, 5.0, 0.0);
         ColumnSpacing = 5;
+        RowSpacing = 4;
         RowDefinitions = [
             new RowDefinition(GridLength.Auto),
             new RowDefinition(GridLength.Auto),
@@ -39,7 +40,7 @@ public class PositionPropertyEditor : Grid, IPropertyEditor, IValueConverter
         });
 
         Children.Add(numericUpDownForX);
-        Grid.SetRow(numericUpDownForX, 0);
+        SetRow(numericUpDownForX, 0);
 
         NumericUpDown numericUpDownForY = new() {
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -52,7 +53,7 @@ public class PositionPropertyEditor : Grid, IPropertyEditor, IValueConverter
         });
 
         Children.Add(numericUpDownForY);
-        Grid.SetRow(numericUpDownForY, 1);
+        SetRow(numericUpDownForY, 1);
     }
 
     public object? Convert(

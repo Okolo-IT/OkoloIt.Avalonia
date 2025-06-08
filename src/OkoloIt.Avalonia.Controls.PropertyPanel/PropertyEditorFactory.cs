@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Numerics;
 
 using Avalonia.Controls;
 using Avalonia.Data;
 
 using OkoloIt.Avalonia.Controls.Editors;
+using OkoloIt.Avalonia.Controls.Helpers;
 
 namespace OkoloIt.Avalonia.Controls;
 
@@ -35,28 +35,18 @@ public static class PropertyEditorFactory
         }
 
         // Creating inline editors.
-        if (property.PropertyType == typeof(bool))
+        if (property.PropertyType.IsBool())
             return new BooleanPropertyEditor();
         if (property.PropertyType.IsEnum)
             return new EnumPropertyEditor();
-        if (property.PropertyType == typeof(string))
+        if (property.PropertyType.IsText())
             return new TextPropertyEditor();
-        if (property.PropertyType == typeof(Guid))
+        if (property.PropertyType.IsGuid())
             return new GuidPropertyEditor();
-
-        if (   property.PropertyType == typeof(int)
-            || property.PropertyType == typeof(decimal)
-            || property.PropertyType == typeof(uint)
-            || property.PropertyType == typeof(long)
-            || property.PropertyType == typeof(ulong)
-            || property.PropertyType == typeof(short)
-            || property.PropertyType == typeof(ushort)
-            || property.PropertyType == typeof(byte)
-            || property.PropertyType == typeof(sbyte)
-            || property.PropertyType == typeof(float)
-            || property.PropertyType == typeof(double)) {
+        if (property.PropertyType.IsDateTime())
+            return new DateTimePropertyEditor();
+        if (property.PropertyType.IsNumeric())
             return new NumericPropertyEditor();
-        }
 
         // Creating a default editor.
         return new DefaultPropertyEditor();

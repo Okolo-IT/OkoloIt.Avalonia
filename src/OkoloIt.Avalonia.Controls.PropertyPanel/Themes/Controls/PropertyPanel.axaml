@@ -5,11 +5,14 @@
     <Style Selector="local|PropertyPanel">
         <Setter Property="Template">
             <ControlTemplate>
-                <ScrollViewer>
+                <ScrollViewer AllowAutoHide="False">
                     <ItemsControl ItemsSource="{TemplateBinding Categories}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="local:PropertyCategory">
-                                <Expander Header="{Binding Name}" HorizontalAlignment="Stretch" IsExpanded="True">
+                                <Expander Header="{Binding Name}"
+                                          HorizontalAlignment="Stretch"
+                                          IsExpanded="True"
+                                          Padding="5 0">
                                     <ItemsControl ItemsSource="{Binding Properties}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
