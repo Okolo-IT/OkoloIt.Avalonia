@@ -40,7 +40,7 @@ public class PositionPropertyEditor : Grid, IPropertyEditor, IValueConverter
         });
 
         Children.Add(numericUpDownForX);
-        Grid.SetRow(numericUpDownForX, 0);
+        SetRow(numericUpDownForX, 0);
 
         NumericUpDown numericUpDownForY = new() {
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -53,7 +53,7 @@ public class PositionPropertyEditor : Grid, IPropertyEditor, IValueConverter
         });
 
         Children.Add(numericUpDownForY);
-        Grid.SetRow(numericUpDownForY, 1);
+        SetRow(numericUpDownForY, 1);
     }
 
     public object? Convert(

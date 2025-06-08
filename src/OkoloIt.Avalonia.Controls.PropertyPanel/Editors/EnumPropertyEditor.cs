@@ -49,7 +49,11 @@ internal class EnumPropertyEditor : ContentControl, IPropertyEditor, IValueConve
     }
 
     /// <inheritdoc/>
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(
+        object? value,
+        Type targetType,
+        object? parameter,
+        CultureInfo culture)
     {
         object? convertedValue = default;
 
@@ -60,7 +64,11 @@ internal class EnumPropertyEditor : ContentControl, IPropertyEditor, IValueConve
     }
 
     /// <inheritdoc/>
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object? ConvertBack(
+        object? value,
+        Type targetType,
+        object? parameter,
+        CultureInfo culture)
     {
         return value is string enumName
             ? _enumValues.FirstOrDefault(x => x.Name.Equals(enumName)).Value
