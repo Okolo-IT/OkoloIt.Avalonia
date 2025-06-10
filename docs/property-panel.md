@@ -11,6 +11,7 @@ You can use the following attributes listed below to edit properties in the **Pr
 - `System.ComponentModel.DisplayNameAttribute`
 - `System.ComponentModel.EditorAttribute`
 - `System.ComponentModel.ReadOnlyAttribute`
+- `System.ComponentModel.DataAnnotations.RangeAttribute`
 
 ## Supported types
 
