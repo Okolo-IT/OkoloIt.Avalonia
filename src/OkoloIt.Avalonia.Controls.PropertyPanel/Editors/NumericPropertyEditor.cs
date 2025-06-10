@@ -26,58 +26,74 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
             DataContext = property,
         };
 
-        if (property.PropertyType == typeof(int)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = int.MaxValue;
-            numericUpDown.Minimum = int.MinValue;
-        }
-
-        if (property.PropertyType == typeof(uint)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = uint.MaxValue;
-            numericUpDown.Minimum = uint.MinValue;
-        }
-
-        if (property.PropertyType == typeof(long)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = long.MaxValue;
-            numericUpDown.Minimum = long.MinValue;
-        }
-
-        if (property.PropertyType == typeof(ulong)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = ulong.MaxValue;
-            numericUpDown.Minimum = ulong.MinValue;
-        }
-
-        if (property.PropertyType == typeof(short)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = short.MaxValue;
-            numericUpDown.Minimum = short.MinValue;
-        }
-
-        if (property.PropertyType == typeof(ushort)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = ushort.MaxValue;
-            numericUpDown.Minimum = ushort.MinValue;
-        }
-
-        if (property.PropertyType == typeof(byte)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = byte.MaxValue;
-            numericUpDown.Minimum = byte.MinValue;
-        }
-
-        if (property.PropertyType == typeof(sbyte)) {
-            numericUpDown.FormatString = "0";
-            numericUpDown.Maximum = sbyte.MaxValue;
-            numericUpDown.Minimum = sbyte.MinValue;
-        }
+        ConfigureControl(numericUpDown, property);
 
         numericUpDown.Bind(NumericUpDown.ValueProperty, new Binding(nameof(PropertyItem.Value)) {
             Mode = BindingMode.TwoWay
         });
 
         Content = numericUpDown;
+    }
+
+    private static void ConfigureControl(NumericUpDown numericUpDown, PropertyItem property)
+    {
+        var minimum = property.Minimum;
+        var maximum = property.Maximum;
+
+        if (property.PropertyType == typeof(int)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (int)maximum : int.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (int)minimum : int.MinValue;
+            return;
+        }
+
+        if (property.PropertyType == typeof(uint)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (uint)maximum : uint.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (uint)minimum : uint.MinValue;
+            return;
+        }
+
+        if (property.PropertyType == typeof(long)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (long)maximum : long.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (long)minimum : long.MinValue;
+            return;
+        }
+
+        if (property.PropertyType == typeof(ulong)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (ulong)maximum : ulong.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (ulong)minimum : ulong.MinValue;
+            return;
+        }
+
+        if (property.PropertyType == typeof(short)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (short)maximum : short.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (short)minimum : short.MinValue;
+            return;
+        }
+
+        if (property.PropertyType == typeof(ushort)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (ushort)maximum : ushort.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (ushort)minimum : ushort.MinValue;
+            return;
+        }
+
+        if (property.PropertyType == typeof(byte)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (byte)maximum : byte.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (byte)minimum : byte.MinValue;
+            return;
+        }
+
+        if (property.PropertyType == typeof(sbyte)) {
+            numericUpDown.FormatString = "0";
+            numericUpDown.Maximum = maximum is not null ? (sbyte)maximum : sbyte.MaxValue;
+            numericUpDown.Minimum = minimum is not null ? (sbyte)minimum : sbyte.MinValue;
+            return;
+        }
     }
 }

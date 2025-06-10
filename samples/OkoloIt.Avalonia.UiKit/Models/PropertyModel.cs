@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 namespace OkoloIt.Avalonia.UiKit.Models;
@@ -25,6 +26,8 @@ public class PropertyModel : INotifyPropertyChanged
         }
     }
 
+    public Tuple<int> UndefinedType { get; set; } = new Tuple<int>(1);
+
     public bool BoolValue {
         get => _boolValue;
         set {
@@ -36,6 +39,16 @@ public class PropertyModel : INotifyPropertyChanged
     [DisplayName("Number")]
     [Category("Numbers")]
     public int IntValue {
+        get => _intValue;
+        set {
+            _intValue = value;
+            OnPropertyChanged();
+        }
+    }
+
+    [Category("Numbers")]
+    [Range(0, 10)]
+    public int PositiveIntValue {
         get => _intValue;
         set {
             _intValue = value;
