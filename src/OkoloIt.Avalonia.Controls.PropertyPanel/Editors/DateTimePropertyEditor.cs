@@ -8,18 +8,24 @@ using Avalonia.Layout;
 
 namespace OkoloIt.Avalonia.Controls.Editors;
 
+/// <summary>
+/// Mechanism to receive push notifications when <see cref="TimeSpan"/> changes.
+/// </summary>
 file class TimeSpanObserver(PropertyItem property) : IObserver<TimeSpan?>
 {
     private readonly PropertyItem _property = property;
 
+    /// <inheritdoc/>
     public void OnCompleted()
     {
     }
 
+    /// <inheritdoc/>
     public void OnError(Exception error)
     {
     }
 
+    /// <inheritdoc/>
     public void OnNext(TimeSpan? value)
     {
         if (value is null || _property.Value is not DateTimeOffset dateTime)
