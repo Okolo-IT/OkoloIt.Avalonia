@@ -25,6 +25,8 @@ public class PropertyModel : INotifyPropertyChanged
         }
     }
 
+    public Tuple<int> UndefinedType { get; set; } = new Tuple<int>(1);
+
     public bool BoolValue {
         get => _boolValue;
         set {
