@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -33,6 +34,13 @@ public class PropertyItem : INotifyPropertyChanged
         _instance = instance;
 
         _instance.PropertyChanged += OnInstancePropertyChanged;
+
+        foreach (var attribyte in descriptor.Attributes) {
+            if (attribyte is RangeAttribute range) {
+                Minimum = range.Minimum;
+                Maximum = range.Maximum;
+            }
+        }
     }
 
     /// <summary>
@@ -69,6 +77,16 @@ public class PropertyItem : INotifyPropertyChanged
     /// Editor for the property.
     /// </summary>
     public Control Editor => _editor ?? CreateEditor();
+
+    /// <summary>
+    /// Gets a minimum value;
+    /// </summary>
+    public object? Minimum { get; }
+
+    /// <summary>
+    /// Gets a maximum value;
+    /// </summary>
+    public object? Maximum { get; }
 
     /// <summary>
     /// Property value.
