@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 
 using Avalonia.Controls;
-using Avalonia.Data;
 
 using OkoloIt.Avalonia.Controls.Editors;
 using OkoloIt.Avalonia.Controls.Helpers;
@@ -67,18 +66,6 @@ public static class PropertyEditorFactory
         }
 
         // Manual binding.
-        var valueProperty = editor.GetType().GetProperty("Value")
-            ?? editor.GetType().GetProperty("Text");
-
-        if (valueProperty is null)
-            return;
-
-        var binding = new Binding("Value") {
-            Mode = BindingMode.TwoWay
-        };
-
-        // editor.Bind(valueProperty.PropertyType, binding, this);
-
         throw new NotSupportedException("Manual binding is not supported.");
     }
 }
