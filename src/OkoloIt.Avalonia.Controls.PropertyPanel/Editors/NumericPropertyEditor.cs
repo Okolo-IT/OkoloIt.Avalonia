@@ -1,6 +1,11 @@
-﻿using Avalonia.Controls;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+
+using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Layout;
+
+using OkoloIt.Avalonia.Controls.Helpers;
 
 namespace OkoloIt.Avalonia.Controls.Editors;
 
@@ -37,8 +42,7 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
 
     private static void ConfigureControl(NumericUpDown numericUpDown, PropertyItem property)
     {
-        var minimum = property.Minimum;
-        var maximum = property.Maximum;
+        var (minimum, maximum) = GetMinMax(property);
 
         if (property.PropertyType == typeof(int)) {
             numericUpDown.FormatString = "0";
@@ -95,5 +99,23 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
             numericUpDown.Minimum = minimum is not null ? (sbyte)minimum : sbyte.MinValue;
             return;
         }
+    }
+
+    private static (object? Minimum, object? Maximum) GetMinMax(PropertyItem property)
+    {
+        try {
+            foreach (var attribute in property.Attributes) {
+                if (attribute is RangeAttribute range && range.OperandType.IsNumeric()) {
+                    // Checking and converting minimum and maximum values.
+                    _ = range.FormatErrorMessage(string.Empty);
+                    return (range.Minimum, range.Maximum);
+                }
+            }
+        }
+        catch (Exception ex) {
+            Debug.WriteLine($"[Okit]: {ex.Message}. Property `{property.Name}`.");
+        }
+
+        return (default, default);
     }
 }
