@@ -3,9 +3,12 @@
         xmlns:local="clr-namespace:OkoloIt.Avalonia.Controls">
 
     <Style Selector="local|PropertyPanel">
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <ControlTemplate>
-                <ScrollViewer AllowAutoHide="False">
+                <ScrollViewer AllowAutoHide="False"
+                              Padding="{TemplateBinding Padding}"
+                              Background="{TemplateBinding Background}">
                     <ItemsControl ItemsSource="{TemplateBinding Categories}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="local:PropertyCategory">
@@ -13,12 +16,17 @@
                                           HorizontalAlignment="Stretch"
                                           IsExpanded="True"
                                           Padding="5 0">
-                                    <ItemsControl ItemsSource="{Binding Properties}">
+                                    <ItemsControl ItemsSource="{Binding Properties}"
+                                                  Background="{TemplateBinding Background}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid ColumnDefinitions="150 *" Margin="0 2">
-                                                    <TextBlock Text="{Binding DisplayName}"
+                                                <Grid ColumnDefinitions="auto *"
+                                                      ColumnSpacing="10"
+                                                      Margin="0 2">
+                                                    <TextBlock Grid.Column="0"
+                                                               Text="{Binding DisplayName}"
                                                                VerticalAlignment="Center"
+                                                               Width="150"
                                                                ToolTip.Tip="{Binding Description}"/>
                                                     <ContentControl Grid.Column="1"
                                                                     HorizontalAlignment="Stretch"
