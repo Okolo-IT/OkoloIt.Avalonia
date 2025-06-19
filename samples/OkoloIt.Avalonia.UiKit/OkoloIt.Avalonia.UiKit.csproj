@@ -18,5 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\OkoloIt.Avalonia.Controls.PropertyPanel\OkoloIt.Avalonia.Controls.PropertyPanel.csproj" />
+    <ProjectReference Include="..\..\src\OkoloIt.Avalonia.Dialogs\OkoloIt.Avalonia.Dialogs.csproj" />
   </ItemGroup>
 </Project>
