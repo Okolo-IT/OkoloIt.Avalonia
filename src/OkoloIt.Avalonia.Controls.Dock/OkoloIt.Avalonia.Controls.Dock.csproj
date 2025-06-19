@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>$(CurrentTargetFramework);$(LegacyTargetFrameworks);netstandard2.0</TargetFrameworks>
+        <RootNamespace>OkoloIt.Avalonia.Controls</RootNamespace>
+        <IsPackable>true</IsPackable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Version>0.1.0-alpha</Version>
+        <PackageTags>avalonia;avaloniaui;ui;docklayout;dock;okoloit</PackageTags>
+        <PackageProjectUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</PackageProjectUrl>
+        <PackageReleaseNotes>https://github.com/Okolo-IT/OkoloIt.Avalonia/releases</PackageReleaseNotes>
+        <Authors>OkoloIt Team</Authors>
+        <Copyright>Copyright 2025-$([System.DateTime]::Now.ToString(`yyyy`)) © The OkoloIt Project</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageDescription>The Dock component allows you to implement the classic docking UI that you can find in popular IDEs.</PackageDescription>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</RepositoryUrl>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <PackageReadmeFile>dock-panel.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaXaml Include="Themes/**/*.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\docs\dock-panel.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\res\Icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    </ItemGroup>
+</Project>

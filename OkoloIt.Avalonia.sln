@@ -17,14 +17,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C71A0425
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{D12319BF-4357-4B88-9E21-61C746CD52D6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{00F1DA3C-F4C6-4D72-B83F-AA06B3F9E72D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{535C8380-9921-4CD1-BD44-CD22431A580B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OkoloIt.Avalonia.Controls.Dock", "src\OkoloIt.Avalonia.Controls.Dock\OkoloIt.Avalonia.Controls.Dock.csproj", "{8A3A07D9-83B6-E9A6-3F33-792272E95779}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D12319BF-4357-4B88-9E21-61C746CD52D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D12319BF-4357-4B88-9E21-61C746CD52D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D82AD239-8BDE-D882-E6ED-4F5785CCEB2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D82AD239-8BDE-D882-E6ED-4F5785CCEB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D82AD239-8BDE-D882-E6ED-4F5785CCEB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,6 +44,12 @@ Global
 		{F2CE0499-A4E2-EF07-8849-97905420886C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2CE0499-A4E2-EF07-8849-97905420886C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2CE0499-A4E2-EF07-8849-97905420886C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D12319BF-4357-4B88-9E21-61C746CD52D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D12319BF-4357-4B88-9E21-61C746CD52D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3A07D9-83B6-E9A6-3F33-792272E95779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3A07D9-83B6-E9A6-3F33-792272E95779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3A07D9-83B6-E9A6-3F33-792272E95779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3A07D9-83B6-E9A6-3F33-792272E95779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +58,8 @@ Global
 		{D82AD239-8BDE-D882-E6ED-4F5785CCEB2F} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 		{A4BC543A-2EC9-089C-C80B-AD33FB1BEA75} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 		{F2CE0499-A4E2-EF07-8849-97905420886C} = {61BE5476-3C7E-4A96-8429-D3D5E4688398}
+		{D12319BF-4357-4B88-9E21-61C746CD52D6} = {535C8380-9921-4CD1-BD44-CD22431A580B}
+		{8A3A07D9-83B6-E9A6-3F33-792272E95779} = {61BE5476-3C7E-4A96-8429-D3D5E4688398}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6D8A4AE-D875-452B-AB1D-0C7F914A4BF8}
