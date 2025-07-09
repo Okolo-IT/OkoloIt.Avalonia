@@ -7,6 +7,21 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <Version>0.0.1-alpha</Version>
+        <PackageTags>avalonia;avaloniaui;ui;dialog;okoloit</PackageTags>
+        <PackageProjectUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</PackageProjectUrl>
+        <PackageReleaseNotes>https://github.com/Okolo-IT/OkoloIt.Avalonia/releases</PackageReleaseNotes>
+        <Authors>OkoloIt Team</Authors>
+        <Copyright>Copyright 2025-$([System.DateTime]::Now.ToString(`yyyy`)) © The OkoloIt Project</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageDescription>Provides a simple way to display a dialog with information or prompt the user when information is required.</PackageDescription>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</RepositoryUrl>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Include="..\..\res\Icon.png">
             <Pack>True</Pack>

@@ -2,38 +2,34 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
+using OkoloIt.Avalonia.Dialogs.Commands;
+
 namespace OkoloIt.Avalonia.Dialogs;
 
 public static class MessageBox
 {
-    public static string DefaultTitle { get; set; } = "";
-    public static string DefaultInformationTitle { get; set; } = "Information";
-    public static string DefaultQuestionTitle { get; set; } = "Question";
-    public static string DefaultWarningTitle { get; set; } = "Warning";
-    public static string DefaultErrorTitle { get; set; } = "Error";
-
     public static async Task<bool?> ShowInformationAsync(string message, string? title = default)
     {
-        title ??= DefaultInformationTitle;
+        title ??= MessageBoxProperties.DefaultInformationTitle;
         return await ShowAsync(message, title, MessageBoxType.Information);
     }
 
     public static async Task<bool?> ShowQuestionAsync(string message, string? title = default)
     {
-        title ??= DefaultQuestionTitle;
-        return await ShowAsync(message, title, MessageBoxType.None);
+        title ??= MessageBoxProperties.DefaultQuestionTitle;
+        return await ShowAsync(message, title, MessageBoxType.Question);
     }
 
     public static async Task<bool?> ShowWarningAsync(string message, string? title = default)
     {
-        title ??= DefaultWarningTitle;
-        return await ShowAsync(message, title, MessageBoxType.None);
+        title ??= MessageBoxProperties.DefaultWarningTitle;
+        return await ShowAsync(message, title, MessageBoxType.Warning);
     }
 
     public static async Task<bool?> ShowErrorAsync(string message, string? title = default)
     {
-        title ??= DefaultErrorTitle;
-        return await ShowAsync(message, title, MessageBoxType.None);
+        title ??= MessageBoxProperties.DefaultErrorTitle;
+        return await ShowAsync(message, title, MessageBoxType.Error);
     }
 
     public static async Task<bool?> ShowAsync(
@@ -41,15 +37,12 @@ public static class MessageBox
         string title = "",
         MessageBoxType messageType = MessageBoxType.None)
     {
-        title ??= DefaultTitle;
+        title ??= MessageBoxProperties.DefaultTitle;
 
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             return await ShowForDesktopAsync(desktop, message, title, messageType);
 
         throw new NotSupportedException("Supported only desktop.");
-
-        // if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleView)
-        //     return await ShowForDesktopAsync();
     }
 
     private static async Task<bool?> ShowForDesktopAsync(
@@ -71,16 +64,21 @@ public static class MessageBox
         string title,
         MessageBoxType messageType)
     {
-        Grid dialogSpace = new();
-        dialogSpace.Children.Add(new TextBlock() {
-            Text = $"[{messageType}] '{message}'"
-        });
+        Dialog dialogSpace = new(messageType, title, message) {
+            OkCommand     = new OkCommand(),
+            YesCommand    = new YesCommand(),
+            NoCommand     = new NoCommand(),
+            CancelCommand = new CancelCommand()
+        };
 
         Window dialog = new() {
             Title = title,
-            Width = 400,
-            Height = 300,
-            Content = dialogSpace
+            MaxWidth = 400,
+            MaxHeight = 500,
+            Content = dialogSpace,
+            CanResize = false,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            SizeToContent = SizeToContent.WidthAndHeight,
         };
 
         return dialog;

@@ -1,0 +1,58 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:OkoloIt.Avalonia.Dialogs"
+        xmlns:converter="using:OkoloIt.Avalonia.Dialogs.Converters">
+
+    <Styles.Resources>
+        <converter:MessageBoxTypeToIconConverter x:Key="MessageBoxTypeToIconConverter"/>
+    </Styles.Resources>
+
+    <Style Selector="local|Dialog">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DockPanel MinHeight="100" MinWidth="230" Margin="10">
+                    <!-- Buttons -->
+                    <StackPanel DockPanel.Dock="Bottom"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Spacing="10"
+                                Margin="0 10 0 0">
+
+                        <Button HorizontalAlignment="Center" Width="70"
+                                IsVisible="{TemplateBinding VisibleOkButton}"
+                                Content="OK"
+                                Command="{TemplateBinding OkCommand}"
+                                CommandParameter="{Binding $parent[Window]}"/>
+
+                        <Button HorizontalAlignment="Center" Width="70"
+                                IsVisible="{TemplateBinding VisibleYesButton}"
+                                Content="Yes"
+                                Command="{TemplateBinding YesCommand}"
+                                CommandParameter="{Binding $parent[Window]}"/>
+
+                        <Button HorizontalAlignment="Center" Width="70"
+                                IsVisible="{TemplateBinding VisibleNoButton}"
+                                Content="No"
+                                Command="{TemplateBinding NoCommand}"
+                                CommandParameter="{Binding $parent[Window]}"/>
+
+                        <Button HorizontalAlignment="Center" Width="70"
+                                IsVisible="{TemplateBinding VisibleCancelButton}"
+                                Content="Cancel"
+                                Command="{TemplateBinding CancelCommand}"
+                                CommandParameter="{Binding $parent[Window]}"/>
+                    </StackPanel>
+
+                    <!-- Icon -->
+                    <ContentControl DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0 0 10 0"
+                                    Content="{TemplateBinding Type, Converter={StaticResource MessageBoxTypeToIconConverter}}"/>
+
+                    <!-- Text -->
+                    <ScrollViewer>
+                        <TextBlock Text="{TemplateBinding Text}" TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </DockPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
