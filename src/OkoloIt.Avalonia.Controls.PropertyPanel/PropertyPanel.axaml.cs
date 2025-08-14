@@ -56,8 +56,10 @@ public class PropertyPanel : TemplatedControl
 
     private void UpdateProperties()
     {
-        if (Content is null)
+        if (Content is null) {
+            Categories = [];
             return;
+        }
 
         var properties = TypeDescriptor.GetProperties(Content)
             .OfType<PropertyDescriptor>()
