@@ -9,12 +9,12 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>0.8.0-beta</Version>
+        <Version>0.8.1-beta</Version>
         <PackageTags>avalonia;avaloniaui;ui;propertypanel;okoloit</PackageTags>
         <PackageProjectUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</PackageProjectUrl>
         <PackageReleaseNotes>https://github.com/Okolo-IT/OkoloIt.Avalonia/releases</PackageReleaseNotes>
         <Authors>OkoloIt Team</Authors>
-        <Copyright>Copyright 2025-$([System.DateTime]::Now.ToString(`yyyy`)) © The OkoloIt Project</Copyright>
+        <Copyright>Copyright 2026-$([System.DateTime]::Now.ToString(`yyyy`)) © The OkoloIt Project</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageDescription>Provides a control for browsing the properties of an object.</PackageDescription>
         <RepositoryType>git</RepositoryType>
