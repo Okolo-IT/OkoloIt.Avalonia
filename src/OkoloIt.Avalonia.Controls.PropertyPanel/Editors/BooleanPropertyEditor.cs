@@ -14,8 +14,9 @@ internal class BooleanPropertyEditor : ContentControl, IPropertyEditor
     /// </summary>
     internal BooleanPropertyEditor()
     {
-        VerticalAlignment = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
+        VerticalAlignment = VerticalAlignment.Center;
+        VerticalContentAlignment = VerticalAlignment.Center;
     }
 
     /// <inheritdoc/>
@@ -23,6 +24,8 @@ internal class BooleanPropertyEditor : ContentControl, IPropertyEditor
     {
         CheckBox checkBox = new() {
             HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Center,
+            VerticalContentAlignment = VerticalAlignment.Center,
             DataContext = property,
         };
 

@@ -37,7 +37,10 @@ internal class EnumPropertyEditor : ContentControl, IPropertyEditor, IValueConve
             .ToList();
 
         ComboBox comboBox = new() {
-            ItemsSource  = _enumValues.Select(x => x.Name),
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Center,
+            VerticalContentAlignment = VerticalAlignment.Center,
+            ItemsSource = _enumValues.Select(x => x.Name),
             SelectedItem = _enumValues.FirstOrDefault(x => x.Value.Equals(property.Value)).Name,
         };
 
