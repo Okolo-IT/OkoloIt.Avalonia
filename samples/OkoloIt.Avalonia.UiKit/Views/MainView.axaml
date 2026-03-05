@@ -22,6 +22,6 @@
                 Content="Random"
                 Command="{Binding GenerateRandomValuesCommand}"/>
 
-        <okit:PropertyPanel Content="{Binding PropertyModel}"/>
+        <okit:PropertyPanel Content="{Binding PropertyModel}" NameWidth="300"/>
     </DockPanel>
 </UserControl>
