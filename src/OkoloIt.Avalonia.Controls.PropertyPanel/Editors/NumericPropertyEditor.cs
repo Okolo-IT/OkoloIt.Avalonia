@@ -19,7 +19,7 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
     /// </summary>
     internal NumericPropertyEditor()
     {
-        VerticalAlignment   = VerticalAlignment.Center;
+        VerticalAlignment = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
     }
 
@@ -28,6 +28,8 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
     {
         NumericUpDown numericUpDown = new() {
             HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Center,
+            VerticalContentAlignment = VerticalAlignment.Center,
             DataContext = property,
         };
 
@@ -113,7 +115,7 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
             }
         }
         catch (Exception ex) {
-            Debug.WriteLine($"[Okit]: {ex.Message}. Property `{property.Name}`.");
+            Debug.WriteLine($"[Okolo]: {ex.Message}. Property `{property.Name}`.");
         }
 
         return (default, default);

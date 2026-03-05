@@ -13,16 +13,18 @@ internal class DefaultPropertyEditor : ContentControl, IPropertyEditor
     /// </summary>
     internal DefaultPropertyEditor()
     {
-        VerticalAlignment   = VerticalAlignment.Center;
+        VerticalAlignment = VerticalAlignment.Center;
         HorizontalAlignment = HorizontalAlignment.Stretch;
+        VerticalContentAlignment = VerticalAlignment.Center;
     }
 
     /// <inheritdoc/>
     public virtual void Bind(PropertyItem property)
     {
         Content = new TextBox() {
-            VerticalAlignment   = VerticalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalContentAlignment = VerticalAlignment.Center,
             Text = property.Value?.ToString(),
             IsReadOnly = true,
         };

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
+
 using Avalonia.Controls;
 
 using OkoloIt.Avalonia.Controls.Editors;
@@ -22,17 +23,16 @@ public static class PropertyEditorFactory
         // Creating a dedicated property editor.
         var editorAttribute = property.Attributes.OfType<EditorAttribute>().FirstOrDefault();
 
-        if (editorAttribute is not null)
-        {
+        if (editorAttribute is not null) {
             var assembly = Assembly.GetEntryAssembly();
-            var editorTypeInfo = assembly.DefinedTypes
+            var editorTypeInfo = assembly?.DefinedTypes
                 .FirstOrDefault(t => t.Name.Equals(
                     editorAttribute.EditorTypeName,
                     StringComparison.OrdinalIgnoreCase));
 
-            var editorType = assembly.GetType(editorTypeInfo?.FullName);
+            var editorType = assembly?.GetType(editorTypeInfo?.FullName ?? string.Empty);
 
-            if (Activator.CreateInstance(editorType) is Control editor)
+            if (editorType is not null && Activator.CreateInstance(editorType) is Control editor)
                 return editor;
         }
 
@@ -63,8 +63,7 @@ public static class PropertyEditorFactory
     public static void BindEditor(Control editor, PropertyItem item)
     {
         // Automatic linking.
-        if (editor is IPropertyEditor propertyEditor)
-        {
+        if (editor is IPropertyEditor propertyEditor) {
             propertyEditor.Bind(item);
             return;
         }

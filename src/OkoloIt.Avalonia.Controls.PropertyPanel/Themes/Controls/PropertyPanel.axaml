@@ -4,6 +4,7 @@
 
     <Style Selector="local|PropertyPanel">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="NameWidth" Value="150"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <ScrollViewer AllowAutoHide="False"
@@ -26,7 +27,7 @@
                                                     <TextBlock Grid.Column="0"
                                                                Text="{Binding DisplayName}"
                                                                VerticalAlignment="Center"
-                                                               Width="150"
+                                                               Width="{Binding $parent[local:PropertyPanel].NameWidth}"
                                                                ToolTip.Tip="{Binding Description}"/>
                                                     <ContentControl Grid.Column="1"
                                                                     HorizontalAlignment="Stretch"

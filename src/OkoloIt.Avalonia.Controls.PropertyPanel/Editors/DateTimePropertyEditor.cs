@@ -51,6 +51,7 @@ internal class DateTimePropertyEditor : Grid, IPropertyEditor, IValueConverter
     internal DateTimePropertyEditor()
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
+        VerticalAlignment = VerticalAlignment.Center;
 
         Margin = new Thickness(0.0, 0.0, 5.0, 0.0);
     }

@@ -6,10 +6,11 @@
         <IsPackable>true</IsPackable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>0.8.1-beta</Version>
+        <Version>1.0.0</Version>
         <PackageTags>avalonia;avaloniaui;ui;propertypanel;okoloit</PackageTags>
         <PackageProjectUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</PackageProjectUrl>
         <PackageReleaseNotes>https://github.com/Okolo-IT/OkoloIt.Avalonia/releases</PackageReleaseNotes>
