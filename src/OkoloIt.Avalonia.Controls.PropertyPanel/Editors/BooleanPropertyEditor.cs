@@ -17,6 +17,7 @@ internal class BooleanPropertyEditor : ContentControl, IPropertyEditor
         HorizontalAlignment = HorizontalAlignment.Stretch;
         VerticalAlignment = VerticalAlignment.Center;
         VerticalContentAlignment = VerticalAlignment.Center;
+        HorizontalContentAlignment = HorizontalAlignment.Left;
     }
 
     /// <inheritdoc/>
@@ -26,6 +27,7 @@ internal class BooleanPropertyEditor : ContentControl, IPropertyEditor
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Center,
             VerticalContentAlignment = VerticalAlignment.Center,
+            HorizontalContentAlignment = HorizontalAlignment.Left,
             DataContext = property,
         };
 
