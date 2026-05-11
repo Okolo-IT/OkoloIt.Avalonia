@@ -5,8 +5,6 @@ namespace OkoloIt.Avalonia.Controls;
 /// <summary>
 /// An category in a <see cref="PropertyPanel"/>.
 /// </summary>
-/// <param name="name">Category name.</param>
-/// <param name="properties">List of category properties.</param>
 public class PropertyCategory(string name, IEnumerable<PropertyItem> properties) : AvaloniaObject
 {
     /// <summary>
