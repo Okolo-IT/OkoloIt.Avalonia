@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>$(CurrentTargetFramework);$(LegacyTargetFrameworks);netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>$(CurrentTargetFramework);$(LegacyTargetFrameworks)</TargetFrameworks>
         <RootNamespace>OkoloIt.Avalonia.Controls</RootNamespace>
         <IsPackable>true</IsPackable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
