@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 using Avalonia;
 using Avalonia.Controls.Primitives;
@@ -16,23 +16,15 @@ public class PropertyPanel : TemplatedControl
     /// Defines the <see cref="Content"/> property.
     /// </summary>
     public static readonly StyledProperty<INotifyPropertyChanged?> ContentProperty
-        = AvaloniaProperty.Register<PropertyPanel, INotifyPropertyChanged?>(nameof(ContentProperty));
+        = AvaloniaProperty.Register<PropertyPanel, INotifyPropertyChanged?>(nameof(Content));
 
     /// <summary>
     /// Defines the <see cref="Categories"/> property.
     /// </summary>
     public static readonly DirectProperty<PropertyPanel, IEnumerable<PropertyCategory>> CategoriesProperty
         = AvaloniaProperty.RegisterDirect<PropertyPanel, IEnumerable<PropertyCategory>>(
-            nameof(CategoriesProperty),
+            nameof(Categories),
             o => o.Categories);
-
-    /// <summary>
-    /// Defines the <see cref="NameWidth"/> property.
-    /// </summary>
-    public static readonly StyledProperty<double> NameWidthProperty
-        = AvaloniaProperty.Register<PropertyPanel, double>(
-            nameof(NameWidth),
-            defaultValue: 150.0);
 
     /// <summary>
     /// Gets or sets the model that implements interface <see cref="INotifyPropertyChanged"/>,
@@ -52,11 +44,12 @@ public class PropertyPanel : TemplatedControl
     }
 
     /// <summary>
-    /// Gets or sets the width of the property name column in the panel.
+    /// Optional: Explicit disposal method for the panel itself.
+    /// Call this if the panel is manually removed or disposed by the parent.
     /// </summary>
-    public double NameWidth {
-        get => GetValue(NameWidthProperty);
-        set => SetValue(NameWidthProperty, value);
+    public void Dispose()
+    {
+        CleanupOldCategories();
     }
 
     /// <inheritdoc/>
@@ -67,6 +60,7 @@ public class PropertyPanel : TemplatedControl
         if (!change.Property.Equals(ContentProperty))
             return;
 
+        CleanupOldCategories();
         UpdateProperties();
     }
 
@@ -88,5 +82,13 @@ public class PropertyPanel : TemplatedControl
             .Select(g => new PropertyCategory(g.Key, g.OrderBy(p => p.DisplayName)))
             .OrderBy(c => c.Name)
             .ToList();
+    }
+
+    private void CleanupOldCategories()
+    {
+        foreach (var category in _categories) {
+            foreach (IDisposable disposable in category.Properties)
+                disposable.Dispose();
+        }
     }
 }

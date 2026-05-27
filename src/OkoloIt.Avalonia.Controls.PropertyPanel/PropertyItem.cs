@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -11,11 +10,12 @@ namespace OkoloIt.Avalonia.Controls;
 /// <summary>
 /// A property element representing its display in the interface.
 /// </summary>
-public class PropertyItem : INotifyPropertyChanged
+public class PropertyItem : INotifyPropertyChanged, IDisposable
 {
     private readonly PropertyDescriptor _descriptor;
     private readonly INotifyPropertyChanged _instance;
     private Control? _editor;
+    private bool _disposed = false;
 
     /// <inheritdoc/>
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -97,6 +97,31 @@ public class PropertyItem : INotifyPropertyChanged
         }
     }
 
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Disposes of the object's resources.
+    /// </summary>
+    /// <param name="disposing">
+    /// <see langword="true"/> if called from Dispose();
+    /// <see langword="false"/> if called from a finalizer.
+    /// </param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+            return;
+
+        if (disposing)
+            _instance.PropertyChanged -= OnInstancePropertyChanged;
+
+        _disposed = true;
+    }
+
     /// <summary>
     /// Called when a property changes on the object.
     /// </summary>
@@ -108,6 +133,9 @@ public class PropertyItem : INotifyPropertyChanged
 
     private void OnInstancePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (_disposed)
+            return;
+
         if (e.PropertyName == _descriptor.Name) {
             OnPropertyChanged(nameof(Value));
             OnPropertyChanged(nameof(Editor));
