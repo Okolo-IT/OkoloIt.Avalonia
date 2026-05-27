@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 using Avalonia;
 using Avalonia.Controls.Primitives;
@@ -43,6 +43,15 @@ public class PropertyPanel : TemplatedControl
         set => SetAndRaise(CategoriesProperty, ref _categories, value);
     }
 
+    /// <summary>
+    /// Optional: Explicit disposal method for the panel itself.
+    /// Call this if the panel is manually removed or disposed by the parent.
+    /// </summary>
+    public void Dispose()
+    {
+        CleanupOldCategories();
+    }
+
     /// <inheritdoc/>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
@@ -51,6 +60,7 @@ public class PropertyPanel : TemplatedControl
         if (!change.Property.Equals(ContentProperty))
             return;
 
+        CleanupOldCategories();
         UpdateProperties();
     }
 
@@ -72,5 +82,13 @@ public class PropertyPanel : TemplatedControl
             .Select(g => new PropertyCategory(g.Key, g.OrderBy(p => p.DisplayName)))
             .OrderBy(c => c.Name)
             .ToList();
+    }
+
+    private void CleanupOldCategories()
+    {
+        foreach (var category in _categories) {
+            foreach (IDisposable disposable in category.Properties)
+                disposable.Dispose();
+        }
     }
 }
