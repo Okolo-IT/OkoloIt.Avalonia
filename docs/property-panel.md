@@ -1,4 +1,4 @@
-﻿# OkoloIt.Avalonia.Controls.PropertyPanel
+# OkoloIt.Avalonia.Controls.PropertyPanel
 
 This is a PropertyPanel implementation for [Avalonia](https://github.com/AvaloniaUI/Avalonia), you can use it in **Avalonia** Applications.
 
@@ -79,6 +79,27 @@ Add `PropertyPanel` to your view:
 
     <okit:PropertyPanel Content="{Binding PropertyModel}"/>
 </Window>
+```
+
+## Editors
+
+### Adding an editor via attribute
+
+```cs
+[Editor(typeof(PositionPropertyEditor), typeof(IPropertyEditor))]
+public class Position : INotifyPropertyChanged
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+}
+```
+
+### Registering and overriding an editor
+
+You can add your own editor or override an existing one using `PropertyEditorFactory`:
+
+```cs
+PropertyEditorFactory.Register<PositionPropertyEditor>(typeof(Position));
 ```
 
 [Read More](../samples/OkoloIt.Avalonia.UiKit)
