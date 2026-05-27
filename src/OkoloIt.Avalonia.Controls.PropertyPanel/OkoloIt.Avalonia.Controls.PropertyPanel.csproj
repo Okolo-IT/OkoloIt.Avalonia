@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <PackageTags>avalonia;avaloniaui;ui;propertypanel;okoloit</PackageTags>
         <PackageProjectUrl>https://github.com/Okolo-IT/OkoloIt.Avalonia</PackageProjectUrl>
         <PackageReleaseNotes>https://github.com/Okolo-IT/OkoloIt.Avalonia/releases</PackageReleaseNotes>
