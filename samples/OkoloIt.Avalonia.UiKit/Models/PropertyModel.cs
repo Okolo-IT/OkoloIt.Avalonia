@@ -83,15 +83,19 @@ public class PropertyModel : INotifyPropertyChanged
     }
 
     [Category("Date & time")]
+    [Display(Order = 0)]
     public DateTime FullDate { get; set; } = DateTime.Now;
 
     [Category("Date & time")]
+    [Display(Order = 1)]
     public TimeOnly Time { get; set; } = new TimeOnly(12, 55);
 
     [Category("Date & time")]
+    [Display(Order = 2)]
     public DateOnly Date { get; set; } = new DateOnly(2025, 12, 01);
 
     [Category("Date & time")]
+    [Display(Order = 3)]
     public TimeSpan TimeSpan { get; set; } = DateTime.Now.TimeOfDay;
 
     public event PropertyChangedEventHandler? PropertyChanged;
