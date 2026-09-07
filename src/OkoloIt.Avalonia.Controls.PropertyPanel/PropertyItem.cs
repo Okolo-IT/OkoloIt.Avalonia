@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -34,6 +35,11 @@ public class PropertyItem : INotifyPropertyChanged, IDisposable
         _instance = instance;
 
         _instance.PropertyChanged += OnInstancePropertyChanged;
+
+        Order = descriptor.Attributes
+            .OfType<DisplayAttribute>()
+            .FirstOrDefault()?
+            .GetOrder() ?? int.MinValue;
     }
 
     /// <summary>
@@ -55,6 +61,11 @@ public class PropertyItem : INotifyPropertyChanged, IDisposable
     /// Gets the description of the property.
     /// </summary>
     public string Description => _descriptor.Description;
+
+    /// <summary>
+    /// Gets or sets order the property.
+    /// </summary>
+    public int Order { get; } = 0;
 
     /// <summary>
     /// Gets a value indicating whether this property is read-only.

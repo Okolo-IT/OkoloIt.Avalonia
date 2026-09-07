@@ -75,11 +75,13 @@ public class PropertyPanel : TemplatedControl
             .OfType<PropertyDescriptor>()
             .Where(p => p.IsBrowsable)
             .Select(p => new PropertyItem(p, Content))
+            .OrderBy(p => p.Order)
+            .ThenBy(p => p.DisplayName)
             .ToList();
 
         Categories = properties
             .GroupBy(p => p.Category)
-            .Select(g => new PropertyCategory(g.Key, g.OrderBy(p => p.DisplayName)))
+            .Select(g => new PropertyCategory(g.Key, g))
             .OrderBy(c => c.Name)
             .ToList();
     }
