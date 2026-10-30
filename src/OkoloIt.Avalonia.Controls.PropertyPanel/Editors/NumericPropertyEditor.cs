@@ -39,6 +39,8 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
             Mode = BindingMode.TwoWay
         });
 
+        numericUpDown.Bind(NumericUpDown.WatermarkProperty, new Binding(nameof(PropertyItem.Watermark)));
+
         Content = numericUpDown;
     }
 
