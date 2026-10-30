@@ -29,6 +29,7 @@ internal class BooleanPropertyEditor : ContentControl, IPropertyEditor
             VerticalContentAlignment = VerticalAlignment.Center,
             HorizontalContentAlignment = HorizontalAlignment.Left,
             DataContext = property,
+            IsEnabled = property.IsReadOnly == false,
         };
 
         checkBox.Bind(CheckBox.IsCheckedProperty, new Binding(nameof(PropertyItem.Value)) {
