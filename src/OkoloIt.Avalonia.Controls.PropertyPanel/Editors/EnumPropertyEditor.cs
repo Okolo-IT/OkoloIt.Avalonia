@@ -40,6 +40,7 @@ internal class EnumPropertyEditor : ContentControl, IPropertyEditor, IValueConve
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Center,
             VerticalContentAlignment = VerticalAlignment.Center,
+            IsEnabled = property.IsReadOnly == false,
             ItemsSource = _enumValues.Select(x => x.Name),
             SelectedItem = _enumValues.FirstOrDefault(x => x.Value.Equals(property.Value)).Name,
         };

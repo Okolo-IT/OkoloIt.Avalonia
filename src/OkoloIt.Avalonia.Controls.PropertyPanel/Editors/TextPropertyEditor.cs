@@ -24,13 +24,15 @@ internal class TextPropertyEditor : ContentControl, IPropertyEditor
         TextBox textBox = new() {
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            Text = property.Value?.ToString(),
+            Text = property.HasMultipleValues ? null : property.Value?.ToString(),
             IsReadOnly = property.IsReadOnly,
         };
 
         textBox.Bind(TextBox.TextProperty, new Binding(nameof(PropertyItem.Value)) {
             Mode = BindingMode.TwoWay
         });
+
+        textBox.Bind(TextBox.WatermarkProperty, new Binding(nameof(PropertyItem.Watermark)));
 
         Content = textBox;
     }

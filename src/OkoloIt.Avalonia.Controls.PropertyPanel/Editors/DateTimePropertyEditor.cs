@@ -44,6 +44,7 @@ file class TimeSpanObserver(PropertyItem property) : IObserver<TimeSpan?>
 internal class DateTimePropertyEditor : Grid, IPropertyEditor, IValueConverter
 {
     private Type _propertyType = default!;
+    private bool _isReadOnly = false;
 
     /// <summary>
     /// Creates an instance of the default property editor for a date or time types.
@@ -60,6 +61,7 @@ internal class DateTimePropertyEditor : Grid, IPropertyEditor, IValueConverter
     public virtual void Bind(PropertyItem property)
     {
         _propertyType = property.PropertyType;
+        _isReadOnly = property.IsReadOnly;
 
         if (property.PropertyType == typeof(DateTime)) {
             RowSpacing = 4;
@@ -133,7 +135,9 @@ internal class DateTimePropertyEditor : Grid, IPropertyEditor, IValueConverter
 
     private DatePicker CreateDatePicker(string bindingPath)
     {
-        DatePicker datePicker = new();
+        DatePicker datePicker = new() {
+            IsEnabled = _isReadOnly == false,
+        };
         datePicker.Bind(DatePicker.SelectedDateProperty, new Binding(bindingPath) {
             Mode = BindingMode.TwoWay
         });
@@ -145,7 +149,9 @@ internal class DateTimePropertyEditor : Grid, IPropertyEditor, IValueConverter
 
     private TimePicker CreateTimePicker(string bindingPath)
     {
-        TimePicker timePicker = new();
+        TimePicker timePicker = new() {
+            IsEnabled = _isReadOnly == false,
+        };
 
         timePicker.Bind(TimePicker.SelectedTimeProperty, new Binding(bindingPath) {
             Mode = BindingMode.TwoWay

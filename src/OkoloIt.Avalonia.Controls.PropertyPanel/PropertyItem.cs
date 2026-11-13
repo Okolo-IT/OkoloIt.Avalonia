@@ -10,31 +10,44 @@ namespace OkoloIt.Avalonia.Controls;
 
 /// <summary>
 /// A property element representing its display in the interface.
+/// Supports binding to one or many target instances at once (multi-selection editing).
 /// </summary>
 public class PropertyItem : INotifyPropertyChanged, IDisposable
 {
     private readonly PropertyDescriptor _descriptor;
-    private readonly INotifyPropertyChanged _instance;
+    private readonly List<Target> _targets = [];
     private Control? _editor;
     private bool _disposed = false;
+    private bool _hasMultipleValues = false;
 
     /// <inheritdoc/>
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
-    /// Creates an instance of a property element representing its mapping in the interface.
+    /// Creates an instance of a property element bound to a single model.
     /// </summary>
     /// <param name="descriptor">Property descriptor.</param>
     /// <param name="instance">
-    /// Model whose properties will be displayed, implementing interface
+    /// Model whose property will be displayed, implementing interface
     /// <see cref="INotifyPropertyChanged"/>.
-    /// and inherits the <see cref="Control"/> class.</param>
+    /// </param>
     public PropertyItem(PropertyDescriptor descriptor, INotifyPropertyChanged instance)
+        : this(descriptor, [instance]) { }
+
+    /// <summary>
+    /// Creates an instance of a property element bound to multiple models.
+    /// </summary>
+    /// <param name="descriptor">Representative property descriptor used for metadata.</param>
+    /// <param name="instances">Models whose shared property will be displayed and edited.</param>
+    public PropertyItem(PropertyDescriptor descriptor, IEnumerable<INotifyPropertyChanged> instances)
     {
         _descriptor = descriptor;
-        _instance = instance;
 
-        _instance.PropertyChanged += OnInstancePropertyChanged;
+        foreach (INotifyPropertyChanged instance in instances) {
+            var target = new Target(ResolveDescriptor(instance), instance);
+            target.Instance.PropertyChanged += OnInstancePropertyChanged;
+            _targets.Add(target);
+        }
 
         Order = descriptor.Attributes
             .OfType<DisplayAttribute>()
@@ -78,6 +91,33 @@ public class PropertyItem : INotifyPropertyChanged, IDisposable
     public Type PropertyType => _descriptor.PropertyType;
 
     /// <summary>
+    /// Gets a value indicating whether the bound targets currently hold different values.
+    /// </summary>
+    public bool HasMultipleValues {
+        get => _hasMultipleValues;
+        private set {
+            if (_hasMultipleValues == value)
+                return;
+
+            _hasMultipleValues = value;
+            OnPropertyChanged(nameof(HasMultipleValues));
+            OnPropertyChanged(nameof(Watermark));
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the text shown by editors when bound targets hold different values.
+    /// Supplied by the owner (<see cref="PropertyPanel"/>) so the library stays free of
+    /// hard-coded, locale-specific text.
+    /// </summary>
+    public string MixedValuesWatermark { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets the placeholder text shown by editors when values differ across targets.
+    /// </summary>
+    public string Watermark => HasMultipleValues ? MixedValuesWatermark : string.Empty;
+
+    /// <summary>
     /// Editor for the property.
     /// </summary>
     public Control Editor => _editor ?? CreateEditor();
@@ -88,22 +128,43 @@ public class PropertyItem : INotifyPropertyChanged, IDisposable
     public AttributeCollection Attributes => _descriptor.Attributes;
 
     /// <summary>
-    /// Property value.
+    /// Property value. Returns <see langword="null"/> when bound targets hold different values.
+    /// Setting the value writes it to every bound target.
     /// </summary>
     public object? Value {
         get {
-            var value = _descriptor.GetValue(_instance);
+            if (_targets.Count == 0)
+                return null;
+
+            object? firstRaw = _targets[0].Descriptor.GetValue(_targets[0].Instance);
+            bool mixed = false;
+
+            for (int i = 1; i < _targets.Count; i++) {
+                object? raw = _targets[i].Descriptor.GetValue(_targets[i].Instance);
+
+                if (!Equals(raw, firstRaw)) {
+                    mixed = true;
+                    break;
+                }
+            }
+
+            HasMultipleValues = mixed;
+
+            if (mixed)
+                return null;
 
             return Editor is IValueConverter converter
-                ? converter.Convert(value, _descriptor.PropertyType, null, CultureInfo.CurrentCulture)
-                : value;
+                ? converter.Convert(firstRaw, _descriptor.PropertyType, null, CultureInfo.CurrentCulture)
+                : firstRaw;
         }
         set {
             object? convertedValue = Editor is IValueConverter converter
                 ? converter.ConvertBack(value, _descriptor.PropertyType, null, CultureInfo.CurrentCulture)
                 : Converters.DefaultValueConverter.ConvertValue(value, _descriptor.PropertyType);
 
-            _descriptor.SetValue(_instance, convertedValue);
+            foreach (Target target in _targets)
+                target.Descriptor.SetValue(target.Instance, convertedValue);
+
             OnPropertyChanged(nameof(Value));
         }
     }
@@ -127,8 +188,12 @@ public class PropertyItem : INotifyPropertyChanged, IDisposable
         if (_disposed)
             return;
 
-        if (disposing)
-            _instance.PropertyChanged -= OnInstancePropertyChanged;
+        if (disposing) {
+            foreach (Target target in _targets)
+                target.Instance.PropertyChanged -= OnInstancePropertyChanged;
+
+            _targets.Clear();
+        }
 
         _disposed = true;
     }
@@ -147,8 +212,10 @@ public class PropertyItem : INotifyPropertyChanged, IDisposable
         if (_disposed)
             return;
 
-        if (e.PropertyName == _descriptor.Name) {
+        if (string.IsNullOrEmpty(e.PropertyName) || e.PropertyName == _descriptor.Name) {
             OnPropertyChanged(nameof(Value));
+            OnPropertyChanged(nameof(HasMultipleValues));
+            OnPropertyChanged(nameof(Watermark));
             OnPropertyChanged(nameof(Editor));
         }
     }
@@ -159,4 +226,11 @@ public class PropertyItem : INotifyPropertyChanged, IDisposable
         PropertyEditorFactory.BindEditor(_editor, this);
         return _editor;
     }
+
+    private PropertyDescriptor ResolveDescriptor(INotifyPropertyChanged instance)
+    {
+        return TypeDescriptor.GetProperties(instance).Find(_descriptor.Name, true) ?? _descriptor;
+    }
+
+    private sealed record Target(PropertyDescriptor Descriptor, INotifyPropertyChanged Instance);
 }

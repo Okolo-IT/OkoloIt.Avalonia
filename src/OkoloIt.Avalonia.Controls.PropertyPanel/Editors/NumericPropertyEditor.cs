@@ -30,6 +30,7 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Center,
             VerticalContentAlignment = VerticalAlignment.Center,
+            IsReadOnly = property.IsReadOnly,
             DataContext = property,
         };
 
@@ -38,6 +39,8 @@ internal class NumericPropertyEditor : ContentControl, IPropertyEditor
         numericUpDown.Bind(NumericUpDown.ValueProperty, new Binding(nameof(PropertyItem.Value)) {
             Mode = BindingMode.TwoWay
         });
+
+        numericUpDown.Bind(NumericUpDown.WatermarkProperty, new Binding(nameof(PropertyItem.Watermark)));
 
         Content = numericUpDown;
     }
